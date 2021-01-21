@@ -174,6 +174,7 @@ procedure TfrmMain.FormShow(Sender: TObject);
 begin
    Animate1.Active := True;
    Application.ProcessMessages;
+   Sleep(2000);
    PostMessage(self.Handle, WM_INSIGHT_UPDATE, 0, 0);
 end;
 

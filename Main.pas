@@ -275,6 +275,22 @@ begin
 
          Application.ProcessMessages;
 
+         SourceString := 'http://releases.bhlinsight.com/FileReleases/Files/Images.zip';
+         sZipFile := IncludeTrailingBackslash(ExtractFileDir(Application.ExeName)) + 'Images.zip';
+         Application.ProcessMessages;
+         DownloadFile(SourceString, 'Images.zip', 'InsightFileDownload' ,'regdeL99!');
+         Application.ProcessMessages;
+         AZipFile := TZipfile.Create;
+         try
+            AZipfile.Open(sZipFile, zmRead);
+            AZipfile.ExtractAll(IncludeTrailingBackslash(ExtractFileDir(Application.ExeName))+'images');
+            AZipfile.Close;
+         finally
+            AZipfile.Free;
+            TFile.delete(sZipFile);
+         end;
+
+         Application.ProcessMessages;
          try
             reg := TRegistry.Create;
             try
